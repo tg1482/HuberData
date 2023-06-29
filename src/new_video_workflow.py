@@ -114,7 +114,7 @@ def transcribe_video(video_id):
 
 
 # Add video info to database
-def add_video_info(video_data):
+def add_video_info_to_db(video_data):
     # Connect to the database
     db = connect_to_db()
 
@@ -145,7 +145,7 @@ def add_video_info(video_data):
 
 
 # Add video transcript to database
-def add_transcription(youtube_id, transcription):
+def add_transcription_to_db(youtube_id, transcription):
     # Connect to the database
     db = connect_to_db()
 
@@ -170,7 +170,7 @@ def initiate_workflow_for_video(youtube_id):
     video_data = get_video_info(youtube_id)
 
     logging.info(f"Adding video info to database: {youtube_id} | {video_data['title']}")
-    add_video_info(video_data)
+    add_video_info_to_db(video_data)
 
     logging.info(f"Downloading video: {youtube_id} | {video_data['title']}")
     download_video(video_data)
@@ -182,6 +182,6 @@ def initiate_workflow_for_video(youtube_id):
     logging.info(
         f"Writing transcription to database: {youtube_id} | {video_data['title']}"
     )
-    add_transcription(youtube_id, transcription)
+    add_transcription_to_db(youtube_id, transcription)
 
     logging.info(f"Workflow complete for video: {youtube_id} | {video_data['title']}")
